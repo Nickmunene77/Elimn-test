@@ -2,7 +2,7 @@
 
 Minimal Order Service for a fictitious shop with RBAC, Idempotency, Concurrency, Webhooks, and Caching.
 
-##  Stack
+## Stack
 
 - **Backend**: Node.js, Express, Prisma (SQLite)
 - **Frontend**: React + Vite, Context API for auth
@@ -14,7 +14,7 @@ Minimal Order Service for a fictitious shop with RBAC, Idempotency, Concurrency,
 - **Concurrency**: Optimistic locking via version column
 - **Idempotency**: client_token for order creation
 
-##  Architecture Notes
+## Architecture Notes
 
 - **Backend**:
   - `auth.js` → signup/login
@@ -58,7 +58,7 @@ npm run dev
 npm run test
 
 # Frontend tests
-cd amin-ui
+cd admin-ui
 npm run test
 ```
 
@@ -101,18 +101,17 @@ curl -Method PATCH -Uri http://localhost:4000/orders/1/status -Body $body -Heade
 
 curl -Method GET -Uri http://localhost:4000/orders/1 -Headers @{ Authorization = 'Bearer $token' }
 
-
 Extract ZIP and follow the run instructions above.
 
+## All credentials for testing: All created with the seed.js
 
-All credentials for testing:
+# Admin: admin@example.com / password123
 
-Admin: admin@example.com / password123
+# Users: user1@example.com / password123, user2@example.com / password123
 
-Users: user1@example.com / password123, user2@example.com / password123<img width="1366" height="768" alt="Screenshot (381)" src="https://github.com/user-attachments/assets/b7816f4a-c4c8-4892-9ae3-88e2fbbab97a" />
+<img width="1366" height="768" alt="Screenshot (381)" src="https://github.com/user-attachments/assets/b7816f4a-c4c8-4892-9ae3-88e2fbbab97a" />
 <img width="1366" height="768" alt="Screenshot (380)" src="https://github.com/user-attachments/assets/621e6ece-39cf-4f4e-bb67-d362593dfcd7" />
 <img width="1366" height="768" alt="Screenshot (379)" src="https://github.com/user-attachments/assets/c64ef5d4-9f7c-4e98-992e-fd5597489d75" />
 <img width="1366" height="768" alt="Screenshot (378)" src="https://github.com/user-attachments/assets/ace68acc-4f49-4cf4-9a64-bdb8ca3a0d18" />
 <img width="1366" height="768" alt="Screenshot (377)" src="https://github.com/user-attachments/assets/9cee87b7-9feb-4123-8fd7-971f463c7ea5" />
 <img width="1366" height="768" alt="Screenshot (382)" src="https://github.com/user-attachments/assets/a4de22fd-51da-4fb1-99c6-2d034b686e2b" />
-
