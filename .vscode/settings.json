@@ -1,0 +1,72 @@
+{
+  // ===== CODE FORMATTING =====
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+
+  // ===== LANGUAGE SUPPORT =====
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+
+  // ===== AUTO-SAVE & FILE HANDLING =====
+  "files.autoSave": "onFocusChange",
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/.DS_Store": true
+  },
+
+  // ===== SEARCH CONFIGURATION =====
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true
+  },
+
+  // ===== TERMINAL INTEGRATION =====
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.cursorBlinking": true,
+
+  // ===== EXTENSION-SPECIFIC SETTINGS =====
+  // Prettier
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.semi": true,
+
+  // GitLens
+  "gitlens.currentLine.enabled": false,
+
+  // Error Lens
+  "errorLens.enabled": true,
+  "errorLens.fontSize": "12px",
+
+  // Jest
+  "jest.autoRun": "off",
+
+  // ===== VISUAL ENHANCEMENTS =====
+  "editor.minimap.enabled": false,
+  "editor.lineNumbers": "on",
+  "editor.cursorBlinking": "blink",
+  "editor.renderWhitespace": "boundary",
+
+  // ===== SECURITY =====
+  "security.workspace.trust.enabled": false,
+
+  // ===== ASSESSMENT-SPECIFIC OPTIMIZATIONS =====
+  "editor.quickSuggestions": {
+    "strings": true,
+    "comments": false,
+    "other": true
+  },
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.acceptSuggestionOnCommitCharacter": true
+}

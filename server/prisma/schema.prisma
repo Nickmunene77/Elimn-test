@@ -1,0 +1,110 @@
+// server/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+  refreshTokens RefreshToken[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  @@map("refresh_tokens")
+  @@index([token])
+}
+
+model Order {
+  id           Int         @id @default(autoincrement())
+  userId       Int
+  user         User        @relation(fields: [userId], references: [id])
+  status       OrderStatus @default(PENDING)
+  version      Int         @default(1) // For optimistic locking
+  clientToken  String      // For idempotency - unique per user
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  items        OrderItem[]
+  payments     Payment[]
+
+  @@unique([userId, clientToken]) // Critical for idempotency
+  @@map("orders")
+  @@index([userId])
+  @@index([clientToken])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+model OrderItem {
+  id      Int    @id @default(autoincrement())
+  orderId Int
+  sku     String
+  qty     Int
+  order   Order  @relation(fields: [orderId], references: [id])
+
+  @@map("order_items")
+  @@index([sku])
+  @@index([orderId])
+}
+
+model Payment {
+  id         Int      @id @default(autoincrement())
+  orderId    Int
+  providerId String?  @unique
+  status     String   @default("INITIATED")
+  amount     Int?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  order      Order    @relation(fields: [orderId], references: [id])
+
+  @@map("payments")
+  @@index([orderId])
+  @@index([providerId])
+  @@index([status])
+}
+
+model WebhookEvent {
+  id        Int      @id @default(autoincrement())
+  eventId   String   @unique // For idempotent webhook processing
+  type      String
+  payload   Json
+  attempts  Int      @default(0)
+  status    String   @default("PENDING")
+  lastError String?
+  createdAt DateTime @default(now())
+  processedAt DateTime?
+
+  @@map("webhook_events")
+  @@index([eventId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum Role {
+  ADMIN
+  USER
+}
